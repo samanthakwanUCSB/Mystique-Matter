@@ -63,3 +63,10 @@ def velocity_radial_average(frame):
     c_histogram = np.histogram(dists, bins = bins, weights = correlation_mask)[0]
     counts = np.histogram(dists, bins = bins)[0]
     return c_histogram/counts
+
+def velocity_rms(frame):
+    fx, fy = flow_field[:,:,0], flow_field[:,:,1]
+    #speeds = (fx^2 + fy^2)^(1/2)
+    speeds = np.sqrt(fx ** 2 + fy ** 2).flatten()
+    rms = np.sqrt(np.mean(np.array(speeds)**2))
+    return rms
